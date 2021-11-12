@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Icons/TextIcon.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/CompactNavItem.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 12
+use_filter = true
+font_data = ExtResource( 1 )
+
+[node name="CompactNavItem" type="Panel"]
+margin_right = 72.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 70 )
+mouse_default_cursor_shape = 2
+custom_styles/panel = SubResource( 2 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NavIcon" type="Sprite" parent="."]
+position = Vector2( 35, 28 )
+scale = Vector2( 0.802083, 0.8125 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = -19.0
+margin_right = -5.0
+margin_bottom = -5.0
+custom_fonts/font = SubResource( 1 )
+text = "Enter Text"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[connection signal="gui_input" from="." to="." method="_on_CompactNavItem_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_CompactNavItem_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_CompactNavItem_mouse_exited"]

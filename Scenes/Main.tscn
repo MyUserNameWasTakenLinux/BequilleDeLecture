@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/ToggleButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/CompactNavItem.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Icons/SquareIcon.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Icons/TextIcon.png" type="Texture" id=4]
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0.227451, 0.313726, 0.419608, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Topbar" type="ColorRect" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 0, 56 )
+color = Color( 0.109804, 0.145098, 0.254902, 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Topbar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 10.0
+margin_right = -24.0
+margin_bottom = -6.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LogoContainer" type="HBoxContainer" parent="VBoxContainer/Topbar/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ToggleButton" parent="VBoxContainer/Topbar/HBoxContainer/LogoContainer" instance=ExtResource( 1 )]
+SidebarPath = NodePath("../../../../HBoxContainer/Sidebar")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 56.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="Sidebar" type="ColorRect" parent="VBoxContainer/HBoxContainer"]
+margin_right = 72.0
+margin_bottom = 544.0
+rect_min_size = Vector2( 72, 0 )
+color = Color( 0.109804, 0.145098, 0.254902, 1 )
+
+[node name="Compact" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Sidebar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Sidebar/Compact"]
+margin_right = 72.0
+margin_bottom = 544.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextIcon" parent="VBoxContainer/HBoxContainer/Sidebar/Compact/VBoxContainer" instance=ExtResource( 2 )]
+icon_texture = ExtResource( 4 )
+filled_icon_texture = ExtResource( 4 )
+label_text = "Enter Text"
+
+[node name="CardsIcon" parent="VBoxContainer/HBoxContainer/Sidebar/Compact/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 74.0
+margin_bottom = 144.0
+icon_texture = ExtResource( 3 )
+filled_icon_texture = ExtResource( 3 )
+label_text = "Flashcards"
