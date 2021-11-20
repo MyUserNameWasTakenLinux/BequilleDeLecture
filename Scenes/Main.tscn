@@ -1,13 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/ToggleButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/CompactNavItem.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Icons/SquareIcon.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Icons/TextIcon.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/HDisplayControl.gd" type="Script" id=5]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 1024.0
@@ -48,42 +52,48 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="ToggleButton" parent="VBoxContainer/Topbar/HBoxContainer/LogoContainer" instance=ExtResource( 1 )]
-SidebarPath = NodePath("../../../../HBoxContainer/Sidebar")
+SidebarPath = NodePath("../../../../HDisplayControl/Sidebar")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HDisplayControl" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 56.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_vertical = 3
 custom_constants/separation = 0
+script = ExtResource( 5 )
 
-[node name="Sidebar" type="ColorRect" parent="VBoxContainer/HBoxContainer"]
+[node name="Sidebar" type="ColorRect" parent="VBoxContainer/HDisplayControl"]
 margin_right = 72.0
 margin_bottom = 544.0
 rect_min_size = Vector2( 72, 0 )
 color = Color( 0.109804, 0.145098, 0.254902, 1 )
 
-[node name="Compact" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Sidebar"]
+[node name="Compact" type="ScrollContainer" parent="VBoxContainer/HDisplayControl/Sidebar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Sidebar/Compact"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HDisplayControl/Sidebar/Compact"]
 margin_right = 72.0
 margin_bottom = 544.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TextIcon" parent="VBoxContainer/HBoxContainer/Sidebar/Compact/VBoxContainer" instance=ExtResource( 2 )]
+[node name="TextIcon" parent="VBoxContainer/HDisplayControl/Sidebar/Compact/VBoxContainer" instance=ExtResource( 2 )]
 icon_texture = ExtResource( 4 )
 filled_icon_texture = ExtResource( 4 )
+display_scene_path = "res://Scenes/EnterTextScene.tscn"
 label_text = "Enter Text"
 
-[node name="CardsIcon" parent="VBoxContainer/HBoxContainer/Sidebar/Compact/VBoxContainer" instance=ExtResource( 2 )]
+[node name="CardsIcon" parent="VBoxContainer/HDisplayControl/Sidebar/Compact/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 74.0
 margin_bottom = 144.0
 icon_texture = ExtResource( 3 )
 filled_icon_texture = ExtResource( 3 )
+display_scene_path = "res://Scenes/Flashcards.tscn"
 label_text = "Flashcards"
+
+[connection signal="add_new_display" from="VBoxContainer/HDisplayControl/Sidebar/Compact/VBoxContainer/TextIcon" to="VBoxContainer/HDisplayControl" method="_on_TextIcon_add_new_display"]
+[connection signal="add_new_display" from="VBoxContainer/HDisplayControl/Sidebar/Compact/VBoxContainer/CardsIcon" to="VBoxContainer/HDisplayControl" method="_on_CardsIcon_add_new_display"]
